@@ -6,6 +6,6 @@ export class AppService {
     return 'Hello World!';
   }
   sayGoodbye(): string {
-    return 'Hello World!';
+    return 'Goodbye';
   }
 }
