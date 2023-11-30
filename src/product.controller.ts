@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './product.service';
+import { ProductService } from './product.service';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class ProductController {
+  constructor(private readonly productService: ProductService) {}
 
-  @Get()
+  @Get("Product")
   nouvelle(): string {
-    return this.appService.nouvelleRoute();
+    return this.productService.nouvelleRoute();
   }
 }
