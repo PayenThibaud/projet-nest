@@ -6,7 +6,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get("Product")
-  nouvelle(): string {
+  nouvelle(): string[] {
     return this.productService.nouvelleRoute();
   }
 }
