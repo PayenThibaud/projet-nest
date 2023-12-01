@@ -2,19 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma.service'
+import NormalizedResponse from '../utils/normalized-response';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
  public async create(createUserDto: CreateUserDto) {
-    const createdUser = await this.prisma.users.create({
-      data: {
-        Pseudo: createUserDto.pseudo,
-        Mail: createUserDto.mail,
-      },
-    });
-    return createdUser;
+    const createdUser = new NormalizedResponse(
+      `User ${createUserDto.pseudo} has been created`,
+      await this.prisma.users.create({
+        data: {
+          Pseudo: createUserDto.pseudo,
+          Mail: createUserDto.mail,
+        },
+      }),
+    );
+    return createdUser.toJSON();
   }
 
   findAll() {
