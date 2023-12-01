@@ -1,4 +1,4 @@
 export class CreateUserDto {
-readonly pseudo: string;
-readonly mail: string;
+pseudo: string;
+mail: string;
 }
