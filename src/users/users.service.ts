@@ -27,6 +27,29 @@ export class UsersService {
         UUID: uuid,
       },
     });
+    return gettedUser;
+  }
+  
+  public async updateByUUID(uuid: string, updateUserDto: UpdateUserDto) {
+    const updatedUser = await this.prisma.users.update({
+      where : {
+        UUID: uuid,
+      },
+      data: {
+        Pseudo : !!updateUserDto.pseudo ? updateUserDto.pseudo : undefined,
+        Mail: !!updateUserDto.mail ? updateUserDto.mail : undefined,
+      },
+    });
+    return updatedUser;
+  }
+
+  public async deleteByUUID(uuid: string) {
+    const deleteUser = await this.prisma.users.delete({
+      where : {
+        UUID: uuid,
+      },
+    });
+    return deleteUser;
   }
 
   findOne(id: number) {
