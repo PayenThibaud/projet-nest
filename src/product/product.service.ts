@@ -26,6 +26,32 @@ export class ProductService {
     ).toJSON();
   }
 
+  public async getProductsByUserUUID(userUUID: string) {
+    return new NormalizedResponse(
+      `Products of user '${userUUID}' uuid has been found`,
+      await this.prisma.products.findMany({
+        where: {
+          Author: {
+            UUID: userUUID,
+          },
+        },
+      }),
+    ).toJSON();
+  }
+
+  public async deleteProductsByUserUUID(userUUID: string) {
+    return new NormalizedResponse(
+      `Products for user '${userUUID}' uuid has been deleted`,
+      await this.prisma.products.deleteMany({
+        where: {
+          Author: {
+            UUID: userUUID,
+          },
+        },
+      }),
+    ).toJSON();
+  }
+
   public async getByUUID(uuid: string) {
     return new NormalizedResponse(
       `Product for '${uuid}' uuid has been found`,

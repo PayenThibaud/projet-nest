@@ -3,16 +3,25 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ProductService } from 'src/product/product.service';
 
 @Controller('users')
 @ApiTags('Users')
 
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly productsService: ProductService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Get(':uuid/products')
+  public getProductsByUserUUID(@Param('uuid') uuid: string) {
+    return this.productsService.getProductsByUserUUID(uuid);
   }
 
   @Get()
