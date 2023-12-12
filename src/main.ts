@@ -13,7 +13,6 @@ async function bootstrap() {
 function appConfig(app: INestApplication) {
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 }
-bootstrap();
 
 function initSwagger(app: INestApplication) {
   SwaggerModule.setup(
@@ -25,3 +24,6 @@ function initSwagger(app: INestApplication) {
     ),
   );
 }
+
+bootstrap();
+
